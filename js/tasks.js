@@ -14,10 +14,7 @@ console.log(getUsersWithEyeColor(users, 'blue'));
 
 // ------------ Задание 3 ----------------------------------------------
 
-const getUsersWithGender = (users, gender) => {
-    const usersWithGender = users.filter(user => user.gender === gender);
-    return usersWithGender.map(userWithGender => userWithGender.name);
-};
+const getUsersWithGender = (users, gender) => users.filter(user => user.gender === gender).map(userWithGender => userWithGender.name);
 console.log(getUsersWithGender(users, 'male')); 
 // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
 
@@ -47,3 +44,28 @@ console.log(getUsersWithAge(users, 30, 40));
 // [объект Moore Hensley, объект Sharlene Bush, объект Blackburn Dotson, объект Sheree Anthony]
 
 // ------------ Задание 7 ----------------------------------------------
+
+const calculateTotalBalance = users => users.map(user => user.balance).reduce((acc, value) => acc + value);
+console.log(calculateTotalBalance(users)); // 20916
+
+// ------------ Задание 8 ----------------------------------------------
+
+const getUsersWithFriend = (users, friendName) => users.filter(user => user.friends.includes(friendName)).map(userWithFriend => userWithFriend.name);
+
+console.log(getUsersWithFriend(users, 'Briana Decker')); // [ 'Sharlene Bush', 'Sheree Anthony' ]
+console.log(getUsersWithFriend(users, 'Goldie Gentry')); // [ 'Elma Head', 'Sheree Anthony' ]
+
+// ------------ Задание 9 ----------------------------------------------
+
+const getNamesSortedByFriendsCount = users => [...users].sort((prevUser, nextUser) => prevUser.friends.length - nextUser.friends.length).map(user => user.name);
+console.log(getNamesSortedByFriendsCount(users));
+// [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
+
+// ------------ Задание 10 ---------------------------------------------
+
+const getSortedUniqueSkills = users => {
+  // твой код
+};
+
+// console.log(getSortedUniqueSkills(users));
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
