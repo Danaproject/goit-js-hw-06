@@ -45,7 +45,7 @@ console.log(getUsersWithAge(users, 30, 40));
 
 // ------------ Задание 7 ----------------------------------------------
 
-const calculateTotalBalance = users => users.map(user => user.balance).reduce((acc, value) => acc + value);
+const calculateTotalBalance = users => users.map(user => user.balance).reduce((acc, value) => acc + value, 0);
 console.log(calculateTotalBalance(users)); // 20916
 
 // ------------ Задание 8 ----------------------------------------------
@@ -63,9 +63,66 @@ console.log(getNamesSortedByFriendsCount(users));
 
 // ------------ Задание 10 ---------------------------------------------
 
-const getSortedUniqueSkills = users => {
-  // твой код
+const getSortedUniqueSkills = users => users.reduce((allSkills, user) => {
+    allSkills.push(...user.skills);
+    return [...new Set(allSkills)].sort();
+  }, []);
+
+  console.log(getSortedUniqueSkills(users));
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+  
+//  Решение 2, используя filter
+
+const getSortedUniqueSkills1 = users => users.reduce((allSkills, user) => {
+    allSkills.push(...user.skills);
+    return allSkills.filter((skill, i) => allSkills.indexOf(skill) === i).sort();
+  }, []);
+
+console.log(getSortedUniqueSkills1(users));
+
+//  Решение 2, используя chaining снаружи
+
+const getSortedUniqueSkills2 = users => users.reduce((allSkills, user) => {
+  allSkills.push(...user.skills);
+  return allSkills;
+}, []).filter((skill, i, allSkills) => allSkills.indexOf(skill) === i).sort();
+
+console.log(getSortedUniqueSkills2(users));
+
+//  Решение 3, в развернутой форме, используя reduce
+
+function getSortedUniqueSkills3(users) {
+  
+ const allSkills = users.reduce(function(allSkills, user) {
+  allSkills.push(...user.skills);
+  return allSkills;
+}, []);
+
+  const uniqueSkills = allSkills.reduce(function(uniqueSkills, skill) {
+  if (!uniqueSkills.includes(skill)) {
+    uniqueSkills.push(skill);
+  }
+  return uniqueSkills;
+}, []);
+
+return uniqueSkills.sort();
 };
 
-// console.log(getSortedUniqueSkills(users));
-// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+console.log(getSortedUniqueSkills3(users));
+
+//  Решение 2 в развернутой форме
+
+// function getSortedUniqueSkills4(users) {
+
+//   let allSkills = users.reduce(function(allSkills, user) {
+//    allSkills.push(...user.skills);
+//    return allSkills;
+//  }, []);
+//   allSkills = allSkills.filter(function(skill, i, allSkills) {
+//   return allSkills.indexOf(skill) === i});
+  
+//   return allSkills.sort();
+//  };
+
+// console.log(getSortedUniqueSkills4(users));
+
