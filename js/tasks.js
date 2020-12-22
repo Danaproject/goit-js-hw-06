@@ -131,9 +131,30 @@ function getSortedUniqueSkills3(users) {
 
 console.log(getSortedUniqueSkills3(users));
 
+//  Решение 3, в развернутой форме, используя filter
+
+function getSortedUniqueSkills4(users) {
+  let allSkills = users.reduce(function (allSkills, user) {
+    allSkills.push(...user.skills);
+    return allSkills;
+  }, []);
+
+  let uniqueSkills = [];
+  allSkills = allSkills.filter(function (skill) {
+    if (!uniqueSkills.includes(skill)) {
+      uniqueSkills.push(skill);
+      return uniqueSkills;
+    }
+  });
+
+  return allSkills.sort();
+}
+
+console.log(getSortedUniqueSkills4(users));
+
 //  Решение 2 в развернутой форме
 
-// function getSortedUniqueSkills4(users) {
+// function getSortedUniqueSkills5(users) {
 //   let allSkills = users.reduce(function (allSkills, user) {
 //     allSkills.push(...user.skills);
 //     return allSkills;
@@ -145,4 +166,4 @@ console.log(getSortedUniqueSkills3(users));
 //   return allSkills.sort();
 // }
 
-// console.log(getSortedUniqueSkills4(users));
+// console.log(getSortedUniqueSkills5(users));
